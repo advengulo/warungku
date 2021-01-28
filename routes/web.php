@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 Route::get('/print/{id}', 'HomeController@print');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 Route::get('/transaksi/print_barcode/{id}', 'TransaksiController@printBarcode')->name('transaksi.print_barcode');
 
 
@@ -28,7 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/warung', 'WarungController');
 
     Route::middleware(['has.warung'])->group(function () {
-        Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('/', 'HomeController@index')->name('home');
         Route::get('/transaksi', 'TransaksiController@index')->name('transaksi');
         Route::get('/transaksi/print/{id}', 'TransaksiController@print')->name('transaksi.print');
         Route::get('/transaksi/print_preview/{id}', 'TransaksiController@printJs')->name('transaksi.print_preview');
